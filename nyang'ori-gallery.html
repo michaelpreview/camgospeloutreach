@@ -542,11 +542,16 @@
             z-index: 1;
             background: transparent;
             will-change: transform;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s ease forwards;
         }
 
-        .gallery-section .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .gallery-section .card-img-top {
@@ -557,10 +562,24 @@
             will-change: transform;
             backface-visibility: hidden;
             transform: translateZ(0);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
-        .gallery-section .card:hover .card-img-top {
-            transform: scale(1.05);
+        .gallery-section .card-img-top.loaded {
+            opacity: 1;
+        }
+
+        .gallery-section .card-img-top.loading {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.5; }
+            50% { opacity: 0.8; }
+            100% { opacity: 0.5; }
         }
 
         .gallery-section .card-body {
@@ -866,7 +885,7 @@
                 <div class="nav-links d-none d-lg-flex justify-content-center">
                     <a href="index.html" class="nav-link">Home</a>
                     <a href="about-us.html" class="nav-link">About Us</a>
-                    <a href="events.html" class="nav-link">Events</a>
+                    <a href="events.html" class="nav-link">Ministry Outreach</a>
                     <a href="https://camacademy.org" target="_blank" class="nav-link">CAM Academy</a>
                     <a href="gallery.html" class="nav-link active">Gallery</a>
                     <a href="contact-us.html" class="nav-link">Contact Us</a>
@@ -1772,16 +1791,112 @@
     <script>
         // Initialize AOS with improved settings
         AOS.init({
-            disable: window.innerWidth < 768, // Only disable on small mobile devices
-            once: true, // Only animate once
-            duration: 800, // Animation duration
-            offset: 100, // Offset (in px) from the original trigger point
-            delay: 0, // Default delay
-            easing: 'ease-in-out', // Easing for animations
-            mirror: false // Whether elements should animate out as they scroll out of view
+            disable: window.innerWidth < 768,
+            once: true,
+            duration: 800,
+            offset: 100,
+            delay: 0,
+            easing: 'ease-in-out',
+            mirror: false
         });
 
         $(document).ready(function () {
+            // Image loading optimization
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        const src = img.dataset.src;
+                        if (src) {
+                            img.src = src;
+                            img.classList.add('loading');
+                            img.onload = () => {
+                                img.classList.remove('loading');
+                                img.classList.add('loaded');
+                            };
+                            observer.unobserve(img);
+                        }
+                    }
+                });
+            }, {
+                rootMargin: '50px 0px',
+                threshold: 0.01
+            });
+
+            // Apply lazy loading to all gallery images
+            document.querySelectorAll('.card-img-top').forEach(img => {
+                img.dataset.src = img.src;
+                img.src = '';
+                img.classList.add('loading');
+                imageObserver.observe(img);
+            });
+
+            // Progressive loading for preview images
+            const previewImageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        const src = img.dataset.src;
+                        if (src) {
+                            const lowResSrc = src.replace('.JPG', '_low.JPG');
+                            img.src = lowResSrc;
+                            img.classList.add('loading');
+                            
+                            // Load high resolution image in background
+                            const highResImg = new Image();
+                            highResImg.src = src;
+                            highResImg.onload = () => {
+                                img.src = src;
+                                img.classList.remove('loading');
+                                img.classList.add('loaded');
+                            };
+                            observer.unobserve(img);
+                        }
+                    }
+                });
+            }, {
+                rootMargin: '100px 0px',
+                threshold: 0.01
+            });
+
+            // Apply progressive loading to preview images
+            document.querySelectorAll('.preview-container img').forEach(img => {
+                img.dataset.src = img.src;
+                img.src = '';
+                img.classList.add('loading');
+                previewImageObserver.observe(img);
+            });
+
+            // Optimize image loading for gallery
+            function optimizeGalleryImages() {
+                // Apply hardware acceleration to all gallery images
+                document.querySelectorAll('.card-img-top').forEach(img => {
+                    img.style.transform = 'translateZ(0)';
+                    img.style.backfaceVisibility = 'hidden';
+                    img.style.willChange = 'transform';
+                });
+                
+                // Apply hardware acceleration to all magnify icons
+                document.querySelectorAll('.magnify-icon').forEach(icon => {
+                    icon.style.transform = 'translateZ(0)';
+                    icon.style.backfaceVisibility = 'hidden';
+                    icon.style.willChange = 'transform, opacity';
+                });
+
+                // Preload first few images for better initial experience
+                const firstImages = document.querySelectorAll('.card-img-top:nth-child(-n+6)');
+                firstImages.forEach(img => {
+                    const src = img.dataset.src;
+                    if (src) {
+                        const preloadImg = new Image();
+                        preloadImg.src = src;
+                    }
+                });
+            }
+            
+            // Initialize optimizations
+            optimizeGalleryImages();
+
             // Menu Toggle Functionality
             $('.menu-toggle').click(function () {
                 $(this).toggleClass('active');
@@ -2060,26 +2175,6 @@
             
             // Preload all images on page load
             preloadAllImages();
-            
-            // Optimize image loading for gallery
-            function optimizeGalleryImages() {
-                // Apply hardware acceleration to all gallery images
-                document.querySelectorAll('.card-img-top').forEach(img => {
-                    img.style.transform = 'translateZ(0)';
-                    img.style.backfaceVisibility = 'hidden';
-                    img.style.willChange = 'transform';
-                });
-                
-                // Apply hardware acceleration to all magnify icons
-                document.querySelectorAll('.magnify-icon').forEach(icon => {
-                    icon.style.transform = 'translateZ(0)';
-                    icon.style.backfaceVisibility = 'hidden';
-                    icon.style.willChange = 'transform, opacity';
-                });
-            }
-            
-            // Initialize optimizations
-            optimizeGalleryImages();
         });
     </script>
 </body>
