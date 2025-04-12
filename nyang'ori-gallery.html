@@ -1,0 +1,2087 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nyang'ori Camp Gallery</title>
+    <link rel="icon" type="image/png" href="assets/images/logo.png">
+
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- AOS Animation Library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+
+    <style>
+        :root {
+            --primary: #5e35b1;
+            --accent: #00bcd4;
+            --text-dark: #333333;
+            --text-light: #ffffff;
+            --bg-light: #f9f9f9;
+            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+        }
+
+        body {
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: none;
+            padding: 5px 0;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: none;
+        }
+
+        .navbar.navbar-scrolled {
+            padding: 3px 0;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            padding: 8px 0;
+        }
+
+        .navbar-brand img {
+            height: 50px;
+            transition: all 0.4s ease;
+        }
+
+        .navbar.navbar-scrolled .navbar-brand img {
+            height: 40px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 0 auto;
+        }
+
+        .nav-link {
+            color: var(--text-dark);
+            font-weight: 500;
+            padding: 8px 16px !important;
+            transition: all 0.3s;
+            position: relative;
+            margin: 0 3px;
+            border-radius: 25px;
+            font-size: 14px;
+            letter-spacing: 0.3px;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            border-radius: 20px;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: -1;
+        }
+
+        .nav-link:hover::before {
+            opacity: 0.1;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: all 0.3s;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after {
+            width: 70%;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+            transform: translateY(-1px);
+            background: rgba(94, 53, 177, 0.05);
+        }
+
+        .nav-link.active {
+            color: var(--primary);
+            background: rgba(94, 53, 177, 0.08);
+            font-weight: 600;
+        }
+
+        .nav-link.active::before {
+            opacity: 0.1;
+        }
+
+        .nav-link.active::after {
+            width: 70%;
+        }
+
+        /* Menu Toggle Button */
+        .menu-toggle {
+            display: none;
+            border: none;
+            background: none;
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            position: relative;
+            z-index: 1002;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 30px;
+            height: 2px;
+            background-color: var(--primary);
+            margin: 6px auto;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .menu-toggle.active span {
+            background-color: white;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* Fullscreen Menu */
+        .fullscreen-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            height: 100vh;
+            background: var(--gradient);
+            z-index: 1001;
+            transition: right 0.5s ease;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fullscreen-menu.active {
+            right: 0;
+        }
+
+        .menu-content {
+            text-align: center;
+        }
+
+        .menu-items {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .menu-items li {
+            margin: 20px 0;
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.5s ease;
+        }
+
+        .fullscreen-menu.active .menu-items li {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .menu-items li a {
+            color: white;
+            text-decoration: none;
+            font-size: 34px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 10px 20px;
+        }
+
+        .menu-items li a.active {
+            color: white;
+            position: relative;
+        }
+
+        .menu-items li a.active::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 70%;
+            height: 2px;
+            background-color: white;
+            border-radius: 1px;
+        }
+
+        .menu-items li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: white;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .menu-items li a:hover::after {
+            width: 70%;
+        }
+
+        /* Add animation delays for menu items */
+        .menu-items li:nth-child(1) {
+            transition-delay: 0.1s;
+        }
+
+        .menu-items li:nth-child(2) {
+            transition-delay: 0.2s;
+        }
+
+        .menu-items li:nth-child(3) {
+            transition-delay: 0.3s;
+        }
+
+        .menu-items li:nth-child(4) {
+            transition-delay: 0.4s;
+        }
+
+        .menu-items li:nth-child(5) {
+            transition-delay: 0.5s;
+        }
+
+        .menu-items li:nth-child(6) {
+            transition-delay: 0.6s;
+        }
+
+        @media (max-width: 991.98px) {
+            .nav-links {
+                display: none !important;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .fullscreen-menu {
+                display: flex;
+            }
+
+            .navbar-brand img {
+                height: 40px;
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            .navbar-brand img {
+                height: 35px;
+            }
+        }
+
+        .navbar-brand span {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: all 0.4s ease;
+        }
+
+        .navbar-brand:hover {
+            transform: translateY(-2px);
+        }
+
+        .navbar-brand:hover img {
+            transform: scale(1.05) rotate(3deg);
+        }
+
+        .navbar-brand::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(94, 53, 177, 0.1) 0%, rgba(0, 188, 212, 0.1) 100%);
+            border-radius: 15px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .navbar-brand:hover::before {
+            opacity: 1;
+        }
+
+        .navbar.navbar-scrolled .navbar-brand span {
+            font-size: 20px;
+        }
+
+        @media (max-width: 950px) {
+            .scroll-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 40px;
+                height: 40px;
+            }
+
+            .hero {
+                min-height: 50vh !important;
+            }
+
+            .hero .row {
+                min-height: 40vh !important;
+                padding-top: 60px !important;
+            }
+
+            .hero-wave {
+                height: 100px !important;
+                margin-bottom: -1px;
+            }
+
+            .hero-wave svg {
+                margin-bottom: -1px;
+            }
+
+            .hero-wave path {
+                stroke: none !important;
+                stroke-width: 0 !important;
+            }
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 3px;
+            background: transparent;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+
+        .progress-bar {
+            height: 3px;
+            background: var(--gradient);
+            width: 0%;
+            transition: width 0.1s ease;
+        }
+
+        /* Footer styles from contact-us.html */
+        footer {
+            background: var(--gradient);
+            color: var(--text-light);
+            padding: 50px 0 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.03);
+            top: -200px;
+            right: -200px;
+            z-index: 0;
+        }
+
+        .footer-column {
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-column h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--accent);
+        }
+
+        .quick-links li a {
+            transition: all 0.3s;
+            opacity: 0.9;
+            font-size: 1rem;
+            display: inline-block;
+            padding: 5px 0;
+        }
+
+        .quick-links li a:hover {
+            opacity: 1;
+            transform: translateX(5px);
+        }
+
+        .social-links {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-links a img {
+            width: 30px;
+            height: 30px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        /* Make Gmail icon match YouTube icon size */
+        .social-links a img[alt="Gmail"] {
+            width: 30px;
+            height: 30px;
+            padding: 2px;
+        }
+
+        .social-links a:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 991.98px) {
+            .footer-column {
+                text-align: center;
+            }
+
+            .footer-column h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .footer-column .social-links {
+                justify-content: center;
+                margin: 0 auto;
+            }
+
+            .quick-links li a:hover {
+                transform: translateX(0) translateY(-3px);
+            }
+        }
+
+        /* Swimming Gallery Styles */
+        .gallery-section {
+            background-color: var(--bg-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-section .card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+            background: transparent;
+            will-change: transform;
+        }
+
+        .gallery-section .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .gallery-section .card-img-top {
+            height: 300px;
+            object-fit: cover;
+            transition: all 0.3s ease;
+            border-radius: 15px;
+            will-change: transform;
+            backface-visibility: hidden;
+            transform: translateZ(0);
+        }
+
+        .gallery-section .card:hover .card-img-top {
+            transform: scale(1.05);
+        }
+
+        .gallery-section .card-body {
+            padding: 1.5rem;
+            background: white;
+        }
+
+        .gallery-section .card-title {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .gallery-section .card-text {
+            color: var(--text-dark);
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        /* Image Preview Styles */
+        .card-img-wrapper {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+        }
+
+        .magnify-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.9);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        .card:hover .magnify-icon {
+            opacity: 1;
+        }
+
+        .magnify-icon i {
+            color: var(--primary);
+            font-size: 20px;
+        }
+
+        /* Image Preview Modal */
+        .image-preview-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .image-preview-modal.active {
+            display: flex;
+        }
+
+        .preview-container {
+            position: relative;
+            width: 100%;
+            height: calc(100% - 120px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .preview-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+            will-change: opacity;
+            backface-visibility: hidden;
+            transform: translateZ(0);
+        }
+
+        .preview-container img.fade-out {
+            opacity: 0;
+        }
+
+        .navigation-buttons {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            pointer-events: none;
+        }
+
+        .nav-button {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            pointer-events: auto;
+        }
+
+        .nav-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .thumbnail-container {
+            width: 100%;
+            height: 100px;
+            margin-top: 20px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 10px;
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding: 10px;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+            transform: translateZ(0);
+            will-change: scroll-position;
+            backface-visibility: hidden;
+            perspective: 1000px;
+        }
+
+        .thumbnail {
+            height: 80px;
+            width: auto;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0.6;
+            transform: scale(0.95);
+            flex-shrink: 0;
+            will-change: transform, opacity;
+            backface-visibility: hidden;
+            transform: translateZ(0);
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+        }
+
+        .thumbnail.active {
+            border-color: var(--accent);
+            opacity: 1;
+            transform: scale(1) translateZ(0);
+            box-shadow: 0 0 10px rgba(0, 188, 212, 0.5);
+        }
+
+        .close-preview {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            z-index: 1001;
+            background: none;
+            border: none;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            padding: 0;
+            line-height: 1;
+        }
+
+        .close-preview:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Scroll to Top Button */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .scroll-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            color: white;
+        }
+
+        .scroll-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-to-top i {
+            font-size: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .scroll-to-top:hover i {
+            transform: translateY(-2px);
+        }
+
+        /* Preloader Styles */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
+        }
+
+        .loader {
+            width: 80px;
+            height: 80px;
+            border: 2px solid rgba(94, 53, 177, 0.1);
+            border-top: 2px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            position: relative;
+        }
+
+        .loader::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, var(--primary), var(--accent));
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            padding: 2px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Scroll to Top Button -->
+    <a href="#" class="scroll-to-top" id="scrollToTop">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <!-- Header & Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-between w-100">
+                <a class="navbar-brand" href="index.html">
+                    <img src="assets/images/logo.png" alt="CAM Logo">
+                </a>
+                <div class="nav-links d-none d-lg-flex justify-content-center">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="about-us.html" class="nav-link">About Us</a>
+                    <a href="events.html" class="nav-link">Events</a>
+                    <a href="https://camacademy.org" target="_blank" class="nav-link">CAM Academy</a>
+                    <a href="gallery.html" class="nav-link active">Gallery</a>
+                    <a href="contact-us.html" class="nav-link">Contact Us</a>
+                </div>
+                <button class="menu-toggle" type="button">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+        <div class="fullscreen-menu">
+            <div class="menu-content">
+                <ul class="menu-items">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about-us.html">About Us</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="https://camacademy.org" target="_blank">CAM Academy</a></li>
+                    <li><a href="gallery.html" class="active">Gallery</a></li>
+                    <li><a href="contact-us.html">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero position-relative overflow-hidden" style="padding-top: 80px; min-height: 80vh;">
+        <div class="hero-bg position-absolute w-100 h-100"
+            style="background: linear-gradient(rgba(94, 53, 177, 0.8), rgba(0, 188, 212, 0.8)), url('assets/images/nyangori-hero.jpg') center/cover no-repeat;">
+        </div>
+        <div class="container position-relative">
+            <div class="row min-vh-75 align-items-center justify-content-center py-5" style="min-height: 50vh;">
+                <div class="col-12 text-center text-white">
+                    <h1 class="display-3 fw-bold mb-4" data-aos="fade-up">Nyang'ori Gallery</h1>
+                    <p class="lead mb-5" data-aos="fade-up" data-aos-delay="100">Explore our collection of memorable
+                        moments and activities at the Nyang'ori Youth Camp</p>
+                </div>
+            </div>
+        </div>
+        <div class="hero-wave position-absolute bottom-0 w-100" style="height: 120px; overflow: hidden;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" preserveAspectRatio="none"
+                style="height: 100%; width: 100%; display: block;">
+                <path fill="#f9f9f9" fill-opacity="1" stroke="none"
+                    d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,261.3C960,256,1056,224,1152,208C1248,192,1344,192,1392,192L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
+                </path>
+            </svg>
+        </div>
+    </section>
+
+
+    <section id="gallery-section" class="gallery-section py-5 mt-5">
+        <div class="container">
+            <div class="row g-4">
+                <!-- Nyang'ori Youth Camp -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/2.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/3.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/4.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/5.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/6.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="500">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/7.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="600">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/8.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="700">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/9.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="800">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/10.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="900">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/11.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="1000">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/12.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="1100">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/13.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="1200">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/14.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="1300">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/15.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="1400">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/16.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="1500">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/17.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="1600">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/18.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="1700">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/19.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="1800">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/20.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="1900">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/21.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="2000">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/22.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="2100">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/23.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="2200">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/24.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="2300">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/25.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="2400">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/26.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="2500">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/27.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="2600">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/28.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="2700">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/29.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="2800">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/30.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="2900">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/31.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="3000">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/32.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="3100">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/33.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="3200">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/34.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="3300">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/35.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="3400">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/36.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="3500">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/37.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="3600">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/38.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="3700">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/39.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="3800">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/40.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="3900">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/41.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="4000">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/42.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="4100">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/43.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="4200">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/44.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="4300">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/45.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="4400">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/46.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="4500">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/47.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="4600">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/48.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="4800">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/50.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="4900">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/51.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="5000">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/52.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="5100">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/53.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="5200">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/54.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="5300">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/55.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="5400">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/56.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="5500">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/57.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="5600">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/58.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="5700">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/59.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="5800">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/60.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="5900">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/61.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="6000">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/62.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="6100">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/63.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="6200">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/64.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="6300">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/65.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="6400">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/66.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="6500">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/67.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="6600">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/68.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="6700">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/69.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="6800">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/70.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="6900">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/71.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="7000">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/72.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="7100">
+                    <div class="card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/Nyang'ori/73.JPG" class="card-img-top" alt="Nyang'ori Youth Camp">
+                            <div class="magnify-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-lg-5 col-md-6 mb-3 footer-column">
+                    <h3 class="mb-3">CAM Gospel Outreach</h3>
+                    <p class="mb-3">Transforming lives through the power of the Gospel and practical service to
+                        humanity.</p>
+                    <div class="social-links">
+                        <a href="https://www.youtube.com/channel/UC3ziYsVTfMdpHnwYE5s6r2Q" title="YouTube Channel">
+                            <img src="assets/images/ytlogo.png" alt="YouTube">
+                        </a>
+                        <a href="mailto:camgospeloutreach@gmail.com" title="Send us an email">
+                            <img src="assets/images/gmaillogo.png" alt="Gmail">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-3 footer-column">
+                    <h3 class="mb-3">Quick Links</h3>
+                    <ul class="list-unstyled quick-links">
+                        <li class="mb-2"><a href="index.html" class="text-light text-decoration-none">Home</a></li>
+                        <li class="mb-2"><a href="about-us.html" class="text-light text-decoration-none">About Us</a></li>
+                        <li class="mb-2"><a href="events.html" class="text-light text-decoration-none">Events</a></li>
+                        <li class="mb-2"><a href="https://camacademy.org" target="_blank"
+                                class="text-light text-decoration-none">CAM Academy</a></li>
+                        <li class="mb-2"><a href="gallery.html" class="text-light text-decoration-none">Gallery</a></li>
+                        <li class="mb-2"><a href="contact-us.html" class="text-light text-decoration-none">Contact Us</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center pt-3 mt-3 border-top border-light">
+                <p class="mb-0">&copy; <span id="currentYear"></span> CAM Gospel Outreach. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Image Preview Modal -->
+    <div class="image-preview-modal">
+        <button type="button" class="close-preview" aria-label="Close">&times;</button>
+        <div class="preview-container">
+            <img src="" alt="Preview Image">
+            <div class="navigation-buttons">
+                <button class="nav-button prev-button">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="nav-button next-button">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+        <div class="thumbnail-container">
+            <!-- Thumbnails will be dynamically added here -->
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script>
+        // Initialize AOS with improved settings
+        AOS.init({
+            disable: window.innerWidth < 768, // Only disable on small mobile devices
+            once: true, // Only animate once
+            duration: 800, // Animation duration
+            offset: 100, // Offset (in px) from the original trigger point
+            delay: 0, // Default delay
+            easing: 'ease-in-out', // Easing for animations
+            mirror: false // Whether elements should animate out as they scroll out of view
+        });
+
+        $(document).ready(function () {
+            // Menu Toggle Functionality
+            $('.menu-toggle').click(function () {
+                $(this).toggleClass('active');
+                $('.fullscreen-menu').toggleClass('active');
+                $('body').toggleClass('menu-open');
+            });
+
+            // Remove menu closing behavior for navigation links
+            $('.menu-items a').click(function (e) {
+                // Only close menu if it's not a navigation link
+                if (!$(this).attr('href')) {
+                    $('.menu-toggle').removeClass('active');
+                    $('.fullscreen-menu').removeClass('active');
+                    $('body').removeClass('menu-open');
+                }
+            });
+
+            // Navbar scroll effect
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 50) {
+                    $('.navbar').addClass('navbar-scrolled');
+                } else {
+                    $('.navbar').removeClass('navbar-scrolled');
+                }
+            });
+
+            // Progress bar functionality
+            window.onscroll = function () {
+                let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                let scrolled = (winScroll / height) * 100;
+                document.getElementById("progressBar").style.width = scrolled + "%";
+            };
+
+            // Image Preview Functionality
+            const magnifyIcons = document.querySelectorAll('.magnify-icon');
+            const previewModal = document.querySelector('.image-preview-modal');
+            const previewImage = previewModal.querySelector('.preview-container img');
+            const closePreview = document.querySelector('.close-preview');
+            const prevButton = document.querySelector('.prev-button');
+            const nextButton = document.querySelector('.next-button');
+            const thumbnailContainer = document.querySelector('.thumbnail-container');
+
+            let currentImageIndex = 0;
+            let galleryImages = [];
+            let isTransitioning = false;
+            let preloadedImages = [];
+
+            // Preload all images for better performance
+            function preloadAllImages() {
+                const allImages = document.querySelectorAll('.card-img-top');
+                allImages.forEach(img => {
+                    const src = img.src;
+                    if (src && !preloadedImages.includes(src)) {
+                        const newImg = new Image();
+                        newImg.src = src;
+                        preloadedImages.push(src);
+                    }
+                });
+            }
+
+            // Collect all gallery images
+            function updateGalleryImages() {
+                galleryImages = Array.from(document.querySelectorAll('.card-img-top')).map(img => img.src);
+            }
+
+            // Update thumbnails with optimized rendering
+            function updateThumbnails() {
+                // Clear existing thumbnails
+                thumbnailContainer.innerHTML = '';
+                
+                // Create document fragment for better performance
+                const fragment = document.createDocumentFragment();
+                
+                // Preload all thumbnails before adding them to the DOM
+                const thumbnailPromises = galleryImages.map((src, index) => {
+                    return new Promise((resolve) => {
+                        const img = new Image();
+                        img.onload = () => {
+                    const thumb = document.createElement('img');
+                    thumb.src = src;
+                    thumb.classList.add('thumbnail');
+                    if (index === currentImageIndex) {
+                        thumb.classList.add('active');
+                    }
+                            
+                            // Use event delegation instead of individual event listeners
+                            thumb.dataset.index = index;
+                            fragment.appendChild(thumb);
+                            resolve();
+                        };
+                        img.src = src;
+                    });
+                });
+                
+                // Wait for all thumbnails to load before adding to DOM
+                Promise.all(thumbnailPromises).then(() => {
+                    // Add all thumbnails at once
+                    thumbnailContainer.appendChild(fragment);
+                    
+                    // Add single event listener for thumbnails
+                    thumbnailContainer.addEventListener('click', handleThumbnailClick);
+                    
+                    // Scroll to active thumbnail
+                    const activeThumb = document.querySelector('.thumbnail.active');
+                    if (activeThumb) {
+                        scrollThumbnailIntoView(activeThumb);
+                    }
+                });
+            }
+            
+            // Handle thumbnail clicks
+            function handleThumbnailClick(e) {
+                const thumb = e.target.closest('.thumbnail');
+                if (!thumb) return;
+                
+                const index = parseInt(thumb.dataset.index);
+                if (isNaN(index)) return;
+                
+                        currentImageIndex = index;
+                        updatePreviewImage();
+                scrollThumbnailIntoView(thumb);
+            }
+
+            // Scroll thumbnail into view with optimized scrolling
+            function scrollThumbnailIntoView(thumb) {
+                if (!thumb) return;
+                
+                const container = thumbnailContainer;
+                const thumbLeft = thumb.offsetLeft;
+                const thumbWidth = thumb.offsetWidth;
+                const containerWidth = container.offsetWidth;
+                const scrollLeft = container.scrollLeft;
+                
+                // Check if thumbnail is outside the visible area
+                if (thumbLeft < scrollLeft) {
+                    // Thumbnail is to the left of the visible area
+                    container.scrollTo({
+                        left: thumbLeft - 10,
+                        behavior: 'smooth'
+                    });
+                } else if (thumbLeft + thumbWidth > scrollLeft + containerWidth) {
+                    // Thumbnail is to the right of the visible area
+                    container.scrollTo({
+                        left: thumbLeft - containerWidth + thumbWidth + 10,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+
+            // Update preview image with optimized transitions
+            function updatePreviewImage() {
+                if (isTransitioning) return;
+                isTransitioning = true;
+                
+                previewImage.classList.add('fade-out');
+
+                setTimeout(() => {
+                    // Use preloaded image if available
+                    if (preloadedImages.includes(galleryImages[currentImageIndex])) {
+                    previewImage.src = galleryImages[currentImageIndex];
+                        previewImage.offsetHeight; // Force browser reflow
+                        previewImage.classList.remove('fade-out');
+                        
+                        // Update thumbnails
+                        document.querySelectorAll('.thumbnail').forEach((thumb, index) => {
+                            thumb.classList.toggle('active', index === currentImageIndex);
+                        });
+                        
+                        isTransitioning = false;
+                    } else {
+                        // Preload the next image
+                        const img = new Image();
+                        img.onload = function() {
+                            previewImage.src = galleryImages[currentImageIndex];
+                            previewImage.offsetHeight; // Force browser reflow
+                    previewImage.classList.remove('fade-out');
+
+                    // Update thumbnails
+                    document.querySelectorAll('.thumbnail').forEach((thumb, index) => {
+                        thumb.classList.toggle('active', index === currentImageIndex);
+                    });
+                            
+                            isTransitioning = false;
+                        };
+                        img.src = galleryImages[currentImageIndex];
+                    }
+                }, 300);
+            }
+
+            // Event Listeners
+            magnifyIcons.forEach((icon, index) => {
+                icon.addEventListener('click', function () {
+                    updateGalleryImages();
+                    currentImageIndex = index;
+                    updatePreviewImage();
+                    updateThumbnails();
+                    previewModal.classList.add('active');
+                });
+            });
+
+            // Close button functionality
+            closePreview.addEventListener('click', () => {
+                previewModal.classList.remove('active');
+            });
+
+            // Close on background click
+            previewModal.addEventListener('click', (e) => {
+                if (e.target === previewModal) {
+                    previewModal.classList.remove('active');
+                }
+            });
+
+            // Navigation handlers with debouncing
+            let navTimeout;
+            prevButton.addEventListener('click', () => {
+                if (isTransitioning) return;
+                clearTimeout(navTimeout);
+                navTimeout = setTimeout(() => {
+                currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+                updatePreviewImage();
+                    const activeThumb = document.querySelector('.thumbnail.active');
+                    if (activeThumb) {
+                        scrollThumbnailIntoView(activeThumb);
+                    }
+                }, 50);
+            });
+
+            nextButton.addEventListener('click', () => {
+                if (isTransitioning) return;
+                clearTimeout(navTimeout);
+                navTimeout = setTimeout(() => {
+                currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+                updatePreviewImage();
+                    const activeThumb = document.querySelector('.thumbnail.active');
+                    if (activeThumb) {
+                        scrollThumbnailIntoView(activeThumb);
+                    }
+                }, 50);
+            });
+
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (!previewModal.classList.contains('active')) return;
+
+                if (e.key === 'ArrowLeft') {
+                    prevButton.click();
+                } else if (e.key === 'ArrowRight') {
+                    nextButton.click();
+                } else if (e.key === 'Escape') {
+                    closePreview.click();
+                }
+            });
+
+            // Scroll to Top Button functionality
+            const scrollToTopBtn = document.getElementById('scrollToTop');
+
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    scrollToTopBtn.classList.add('active');
+                } else {
+                    scrollToTopBtn.classList.remove('active');
+                }
+            });
+
+            scrollToTopBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Update copyright year
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+            
+            // Preload all images on page load
+            preloadAllImages();
+            
+            // Optimize image loading for gallery
+            function optimizeGalleryImages() {
+                // Apply hardware acceleration to all gallery images
+                document.querySelectorAll('.card-img-top').forEach(img => {
+                    img.style.transform = 'translateZ(0)';
+                    img.style.backfaceVisibility = 'hidden';
+                    img.style.willChange = 'transform';
+                });
+                
+                // Apply hardware acceleration to all magnify icons
+                document.querySelectorAll('.magnify-icon').forEach(icon => {
+                    icon.style.transform = 'translateZ(0)';
+                    icon.style.backfaceVisibility = 'hidden';
+                    icon.style.willChange = 'transform, opacity';
+                });
+            }
+            
+            // Initialize optimizations
+            optimizeGalleryImages();
+        });
+    </script>
+</body>
+
+</html>
