@@ -125,6 +125,56 @@
         .nav-link:hover::after {
             width: 70%;
         }
+                /* Preloader Styles */
+                #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
+        }
+
+        .loader {
+            width: 80px;
+            height: 80px;
+            border: 2px solid rgba(94, 53, 177, 0.1);
+            border-top: 2px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            position: relative;
+        }
+
+        .loader::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, var(--primary), var(--accent));
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            padding: 2px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
 
         .nav-link:hover {
             color: var(--primary);
@@ -843,6 +893,10 @@
 </head>
 
 <body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader"></div>
+    </div>
     <!-- Scroll to Top Button -->
     <a href="#" class="scroll-to-top" id="scrollToTop">
         <i class="fas fa-arrow-up"></i>
@@ -1061,6 +1115,14 @@
             let scrolled = (winScroll / height) * 100;
             document.getElementById("progressBar").style.width = scrolled + "%";
         };
+                   // Preloader functionality
+                   setTimeout(function () {
+                const preloader = document.getElementById('preloader');
+                preloader.style.opacity = '0';
+                setTimeout(function () {
+                    preloader.style.display = 'none';
+                }, 5500);
+            }, 5500);
 
         // Menu Toggle Functionality
         $(document).ready(function () {
@@ -1110,14 +1172,7 @@
                 });
             });
         });
-        // Preloader functionality
-        setTimeout(function () {
-            const preloader = document.getElementById('preloader');
-            preloader.style.opacity = '0';
-            setTimeout(function () {
-                preloader.style.display = 'none';
-            }, 500);
-        }, 2000);
+
     </script>
 </body>
 
