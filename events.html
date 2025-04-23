@@ -815,6 +815,248 @@
                 transform: rotate(360deg);
             }
         }
+
+        /* Timeline Styles */
+        .timeline {
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 3px;
+            height: 100%;
+            background: var(--gradient);
+            transform: translateX(-50%);
+            border-radius: 3px;
+            box-shadow: 0 0 15px rgba(94, 53, 177, 0.3);
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            background: var(--gradient);
+            transform: translateX(-50%);
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(94, 53, 177, 0.5);
+        }
+
+        .timeline-item {
+            margin-bottom: 70px;
+            position: relative;
+            width: 50%;
+            padding: 20px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 20px;
+            height: 20px;
+            background: var(--gradient);
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(94, 53, 177, 0.5);
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 50px;
+            height: 3px;
+            background: var(--gradient);
+        }
+
+        .timeline-item:nth-child(odd) {
+            margin-left: auto;
+            padding-left: 70px;
+        }
+
+        .timeline-item:nth-child(even) {
+            padding-right: 70px;
+        }
+
+        .timeline-item:nth-child(odd)::before {
+            left: -10px;
+            transform: translateY(-50%);
+        }
+
+        .timeline-item:nth-child(even)::before {
+            right: -10px;
+            transform: translateY(-50%);
+        }
+
+        .timeline-item:nth-child(odd)::after {
+            left: 10px;
+            transform: translateY(-50%);
+        }
+
+        .timeline-item:nth-child(even)::after {
+            right: 10px;
+            transform: translateY(-50%);
+        }
+
+        .timeline-year {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--gradient);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 600;
+            z-index: 2;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(5px);
+        }
+
+        .timeline-content {
+            background: white;
+            border-radius: 15px;
+            padding: 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .timeline-image {
+            width: 100%;
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .timeline-content:hover .timeline-image::after {
+            opacity: 1;
+        }
+
+        .timeline-details {
+            padding: 25px;
+        }
+
+        .timeline-details h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .timeline-details p {
+            font-size: 1rem;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .timeline-link {
+            display: inline-block;
+            padding: 10px 25px;
+            background: var(--gradient);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .timeline-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(94, 53, 177, 0.4);
+        }
+
+        @media (max-width: 991.98px) {
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-item {
+                width: calc(100% - 60px);
+                margin-left: 60px !important;
+                padding: 20px !important;
+            }
+
+            .timeline-item::before {
+                left: -25px !important;
+            }
+
+            .timeline-item::after {
+                left: -5px !important;
+                width: 30px;
+            }
+
+            .timeline-year {
+                right: 15px !important;
+                left: auto !important;
+            }
+
+            .timeline-content {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            .timeline {
+                padding: 60px 0;
+            }
+
+            .timeline-image {
+                height: 250px;
+            }
+
+            .timeline-details {
+                padding: 20px;
+            }
+
+            .timeline-details h3 {
+                font-size: 1.3rem;
+            }
+
+            .timeline-details p {
+                font-size: 0.9rem;
+                margin-bottom: 15px;
+            }
+
+            .timeline-link {
+                padding: 8px 20px;
+                font-size: 0.9rem;
+            }
+        }
     </style>
 </head>
 
@@ -839,8 +1081,9 @@
                     <a href="index.html" class="nav-link">Home</a>
                     <a href="about-us.html" class="nav-link">About Us</a>
                     <a href="events.html" class="nav-link active">Ministry Outreach</a>
-                    <a href="https://begisenpreview.github.io/camacademy/index.html" target="_blank" class="nav-link">CAM Academy</a>
-                    <a href="gallery.html" class="nav-link">Gallery</a>
+                    <a href="https://begisenpreview.github.io/camacademy/index.html" target="_blank"
+                        class="nav-link">CAM Academy</a>
+
                     <a href="contact-us.html" class="nav-link">Contact Us</a>
                 </div>
                 <button class="menu-toggle" type="button">
@@ -856,8 +1099,9 @@
                     <li><a href="index.html">Home</a></li>
                     <li><a href="about-us.html">About Us</a></li>
                     <li><a href="events.html" class="active">Ministry Outreach</a></li>
-                    <li><a href="https://begisenpreview.github.io/camacademy/index.html" target="_blank">CAM Academy</a></li>
-                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="https://begisenpreview.github.io/camacademy/index.html" target="_blank">CAM Academy</a>
+                    </li>
+
                     <li><a href="contact-us.html">Contact Us</a></li>
                 </ul>
             </div>
@@ -890,92 +1134,215 @@
     </section>
 
     <!-- Events Section -->
-    <section class="events-section py-5">
+    <section class="timeline">
         <div class="container">
-            <!-- Upcoming Events -->
-            <div class="mb-5">
-                <h3 class="mb-4" data-aos="fade-right"><span class="gradient-text">Upcoming Events</span></h3>
-                <div class="row g-4">
-                    <!-- TBA Card 1 -->
-                    <div class="col-md-6" data-aos="fade-up">
-                        <div class="event-card">
-                            <div class="event-image" style="background-image: url('assets/images/carousselone.JPG');">
-                                <div class="event-overlay">
-                                    <div class="event-content">
-                                        <h4>Event To Be Announced</h4>
-                                        <p class="event-description">Stay tuned for our next exciting event. We're
-                                            planning something special for our community.</p>
-                                    </div>
-                                </div>
-                            </div>
+            <!-- Upcoming Event -->
+            <div class="timeline-item" data-aos="fade-right">
+                <div class="timeline-content">
+                    <div class="timeline-image"
+                        style="background-image: url('assets/images/logo.png'); background-size: 60%; background-position: center; background-repeat: no-repeat;">
+                        <div
+                            style="position: absolute; top: 20px; right: 20px; background: var(--gradient); color: white; padding: 8px 20px; border-radius: 25px; font-weight: 600; font-size: 14px;">
+                            Coming Soon
                         </div>
                     </div>
-
-                    <!-- TBA Card 2 -->
-                    <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
-                        <div class="event-card">
-                            <div class="event-image" style="background-image: url('assets/images/carousseltwo.JPG');">
-                                <div class="event-overlay">
-                                    <div class="event-content">
-                                        <h4>Event To Be Announced</h4>
-                                        <p class="event-description">Stay tuned for our next exciting event. We're
-                                            planning something special for our community.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="timeline-details">
+                        <h3>To be Announced!</h3>
                     </div>
                 </div>
             </div>
 
-            <!-- Past Events -->
-            <div class="mt-5">
-                <h3 class="mb-4" data-aos="fade-right"><span class="gradient-text">Past Events</span></h3>
-                <div class="row g-4">
-                    <!-- Nyang'ori Event Card -->
-                    <div class="col-md-4" data-aos="fade-up">
-                        <div class="event-card">
-                            <div class="event-image" style="background-image: url('assets/images/carousselthree.JPG');">
-                                <div class="event-overlay">
-                                    <div class="event-content">
-                                        <h4>Nyang'ori Youth Camp</h4>
-                                        <p>April 10, 2024</p>
-                                        <a href="nyangori-recap.html" class="event-link">View Details</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+            <!-- Nyang'ori Youth Camp -->
+            <div class="timeline-item" data-aos="fade-right">
+                <span class="timeline-year">2024</span>
+                <div class="timeline-content">
+                    <div class="timeline-image" style="background-image: url('assets/images/events.JPG');"></div>
+                    <div class="timeline-details">
+                        <h3>Nyang'ori Youth Camp</h3>
+                        <p>A transformative youth camp focused on spiritual growth and leadership development.</p>
+                        <a href="nyangori-event.html" class="timeline-link">View Details</a>
                     </div>
+                </div>
+            </div>
 
-                    <!-- Community Outreach Card -->
-                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
-                        <div class="event-card">
-                            <div class="event-image"
-                                style="background-image: url('assets/images/events/outreach.jpg');">
-                                <div class="event-overlay">
-                                    <div class="event-content">
-                                        <h4>Community Outreach</h4>
-                                        <p>March 5, 2024</p>
-                                        <a href="events/community-outreach.html" class="event-link">View Details</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+            <!-- Vihiga Pastors Prayer Retreat -->
+            <div class="timeline-item" data-aos="fade-left">
+                <span class="timeline-year">2023</span>
+                <div class="timeline-content">
+                    <div class="timeline-image"
+                        style="background-image: url('assets/images/vihigapastors2023/704A4739.JPG');"></div>
+                    <div class="timeline-details">
+                        <h3>Vihiga Pastors Prayer Retreat</h3>
+                        <p>A powerful gathering of pastors for prayer and spiritual renewal.</p>
+                        <a href="vihiga2023-event.html" class="timeline-link">View Details</a>
                     </div>
+                </div>
+            </div>
 
-                    <!-- Worship Night Card -->
-                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-                        <div class="event-card">
-                            <div class="event-image" style="background-image: url('assets/images/events/worship.jpg');">
-                                <div class="event-overlay">
-                                    <div class="event-content">
-                                        <h4>Worship Experience</h4>
-                                        <p>February 15, 2024</p>
-                                        <a href="events/worship-night.html" class="event-link">View Details</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+            <!-- Vihiga 2022 -->
+            <div class="timeline-item" data-aos="fade-left">
+                <span class="timeline-year">2022</span>
+                <div class="timeline-content">
+                    <div class="timeline-image"
+                        style="background-image: url('assets/images/vihigapastors2022/grouppic.jpg');"></div>
+                    <div class="timeline-details">
+                        <h3>Vihiga Pastors Prayer Retreat</h3>
+                        <p>A spiritual retreat focused on prayer and pastoral development.</p>
+                        <a href="vihiga2022-event.html" class="timeline-link">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kapsoi -->
+            <div class="timeline-item" data-aos="fade-right">
+                <span class="timeline-year">2022</span>
+                <div class="timeline-content">
+                    <div class="timeline-image" style="background-image: url('assets/images/kapsoipastors/19.jpg');">
+                    </div>
+                    <div class="timeline-details">
+                        <h3>Kapsoi Pastors Prayer Retreat</h3>
+                        <p>A gathering of pastors for spiritual renewal and fellowship.</p>
+                        <a href="kapsoi-event.html" class="timeline-link">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mombasa -->
+            <div class="timeline-item" data-aos="fade-left">
+                <span class="timeline-year">2021</span>
+                <div class="timeline-content">
+                    <div class="timeline-image" style="background-image: url('assets/images/mombasapastors/27.JPG');">
+                    </div>
+                    <div class="timeline-details">
+                        <h3>Mombasa Pastors Prayer Retreat</h3>
+                        <p>A coastal retreat for pastors focusing on spiritual growth.</p>
+                        <a href="mombasa-event.html" class="timeline-link">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kakamega Pastors -->
+            <div class="timeline-item" data-aos="fade-right">
+                <span class="timeline-year">2016</span>
+                <div class="timeline-content">
+                    <div class="timeline-image" style="background-image: url('assets/images/kakamega/kakamegapastors.jpg');"></div>
+                    <div class="timeline-details">
+                        <h3>Kakamega Pastors Retreat</h3>
+                        <p>A spiritual gathering for pastors in Kakamega focusing on leadership and ministry
+                            development.</p>
+                        <a href="kakamega-event.html" class="timeline-link">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rwanda -->
+            <div class="timeline-item" data-aos="fade-left">
+                <span class="timeline-year">2016</span>
+                <div class="timeline-content">
+                    <div class="timeline-image"
+                        style="background-image: url('assets/images/rwandapastors/background.jpg');"></div>
+                    <div class="timeline-details">
+                        <h3>Rwanda Pastors Retreat</h3>
+                        <p>An international retreat for pastors in Rwanda.</p>
+                        <a href="rwanda-event.html" class="timeline-link">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- West Pokot -->
+            <div class="timeline-item" data-aos="fade-right">
+                <span class="timeline-year">2014</span>
+                <div class="timeline-content">
+                    <div class="timeline-image" style="background-image: url('assets/images/westpokot/1.JPG');"></div>
+                    <div class="timeline-details">
+                        <h3>West Pokot Ministry Outreach</h3>
+                        <p>A transformative ministry outreach program in West Pokot region.</p>
+                        <a href="westpokot-event.html" class="timeline-link">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dar-es-Salaam Crusade -->
+            <div class="timeline-item" data-aos="fade-left">
+                <span class="timeline-year">2014</span>
+                <div class="timeline-content">
+                    <div class="timeline-image" style="background-image: url('assets/images/dar/17.png');">
+                    </div>
+                    <div class="timeline-details">
+                        <h3>Dar es Salaam Crusade</h3>
+                        <p>A powerful evangelistic crusade bringing the Gospel to the heart of Tanzania.</p>
+                        <a href="dar.html" class="timeline-link">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Arusha Pastors -->
+            <div class="timeline-item" data-aos="fade-right">
+                <span class="timeline-year">2012</span>
+                <div class="timeline-content">
+                    <div class="timeline-image" style="background-image: url('assets/images/arusha/arusha.jpg');"></div>
+                    <div class="timeline-details">
+                        <h3>Arusha Pastors Retreat</h3>
+                        <p>A spiritual retreat for pastors in Arusha, Tanzania, focusing on pastoral development and
+                            ministry growth.</p>
+                        <a href="arusha-event.html" class="timeline-link">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CAM 10 Year Anniversary -->
+            <div class="timeline-item" data-aos="fade-left">
+                <span class="timeline-year">2005</span>
+                <div class="timeline-content">
+                    <div class="timeline-image" style="background-image: url('assets/images/anniversary/11.png');">
+                    </div>
+                    <div class="timeline-details">
+                        <h3>CAM 10 Year Anniversary</h3>
+                        <p>A milestone celebration marking a decade of ministry and community service.</p>
+                        <a href="anniversary.html" class="timeline-link">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mbale-Vihiga Crusade -->
+            <div class="timeline-item" data-aos="fade-right">
+                <span class="timeline-year">2001</span>
+                <div class="timeline-content">
+                    <div class="timeline-image" style="background-image: url('assets/images/mbale/1.png');"></div>
+                    <div class="timeline-details">
+                        <h3>Mbale-Vihiga Crusade</h3>
+                        <p>A powerful evangelistic crusade bringing together communities from Mbale and Vihiga regions.
+                        </p>
+                        <a href="mbale-vihiga-event.html" class="timeline-link">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Jinja For Christ -->
+            <div class="timeline-item" data-aos="fade-left">
+                <span class="timeline-year">2004</span>
+                <div class="timeline-content">
+                    <div class="timeline-image" style="background-image: url('assets/images/jinja/1.png');">
+                    </div>
+                    <div class="timeline-details">
+                        <h3>Jinja For Christ Interdenominal Convention</h3>
+                        <p>A unifying convention bringing together different denominations to spread the Gospel in
+                            Jinja.</p>
+                        <a href="jinja-event.html" class="timeline-link">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kampala Pastors Retreat -->
+            <div class="timeline-item" data-aos="fade-right">
+                <span class="timeline-year">1999</span>
+                <div class="timeline-content">
+                    <div class="timeline-image" style="background-image: url('assets/images/kampala/1.png');"></div>
+                    <div class="timeline-details">
+                        <h3>Kampala Pastors Retreat</h3>
+                        <p>A foundational retreat for pastors in Kampala, Uganda, marking a significant milestone in
+                            ministry development.</p>
+                        <a href="kampala-event.html" class="timeline-link">View Details</a>
                     </div>
                 </div>
             </div>
@@ -1003,12 +1370,13 @@
                     <h3 class="mb-3">Quick Links</h3>
                     <ul class="list-unstyled quick-links">
                         <li class="mb-2"><a href="index.html" class="text-light text-decoration-none">Home</a></li>
-                        <li class="mb-2"><a href="about-us.html" class="text-light text-decoration-none">About Us</a></li>
+                        <li class="mb-2"><a href="about-us.html" class="text-light text-decoration-none">About Us</a>
+                        </li>
                         <li class="mb-2"><a href="events.html" class="text-light text-decoration-none">Events</a></li>
-                        <li class="mb-2"><a href="https://begisenpreview.github.io/camacademy/index.html" target="_blank"
-                                class="text-light text-decoration-none">CAM Academy</a></li>
-                        <li class="mb-2"><a href="gallery.html" class="text-light text-decoration-none">Gallery</a></li>
-                        <li class="mb-2"><a href="contact-us.html" class="text-light text-decoration-none">Contact Us</a>
+                        <li class="mb-2"><a href="https://begisenpreview.github.io/camacademy/index.html"
+                                target="_blank" class="text-light text-decoration-none">CAM Academy</a></li>
+                        <li class="mb-2"><a href="contact-us.html" class="text-light text-decoration-none">Contact
+                                Us</a>
                         </li>
                     </ul>
                 </div>
