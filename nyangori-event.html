@@ -687,7 +687,7 @@
             margin-bottom: 50px;
             display: flex;
             flex-direction: row;
-            height: 500px;
+            height: auto;
             position: relative;
             border: 1px solid rgba(94, 53, 177, 0.1);
         }
@@ -872,13 +872,13 @@
 
             .speaker-bio {
                 font-size: 1rem;
-                line-height: 1.7;
+                line-height: 1.7.;
             }
         }
 
         @media (max-width: 576px) {
             .speaker-image-container {
-                flex: 0 0 300px;
+                flex: 0 0 px;
             }
         }
 
@@ -931,6 +931,7 @@
                 height: 40px;
             }
         }
+
         .gallery-section {
             padding: 80px 0;
             background-color: var(--bg-light);
@@ -994,7 +995,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.2) 100%);
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 100%);
             opacity: 0;
             transition: opacity 0.3s ease;
         }
@@ -1002,16 +1003,17 @@
         .gallery-item:hover::after {
             opacity: 1;
         }
+
         @media (max-width: 991.98px) {
             .gallery-container {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 20px;
             }
-            
+
             .recap-content h2 {
                 font-size: 2rem;
             }
-            
+
             .recap-content p {
                 font-size: 1.1rem;
             }
@@ -1021,11 +1023,11 @@
             .gallery-container {
                 grid-template-columns: 1fr;
             }
-            
+
             .recap-content h2 {
                 font-size: 1.8rem;
             }
-            
+
             .recap-content p {
                 font-size: 1rem;
             }
@@ -1095,9 +1097,14 @@
                         <span class="gradient-text">Nyang'ori Youth Camp</span>
                     </h1>
                     <p class="lead mb-5" data-aos="fade-up" data-aos-delay="100">
-                        Experience the powerful messages and life-changing moments from our recent outreach event at
-                        Nyang'ori.
-                        Below are highlights from the exceptional speakers who blessed the event.
+                        This was a powerful and transformative experience for youths from various church denominations
+                        across Western Kenya. They gathered under the anointed worship of the Umoja Voices Band from
+                        Serem and were deeply impacted by messages from various servants of God. The outreach event,
+                        which was originally scheduled to take place at the Pentecostal Bible College in Nyang’ori, was
+                        relocated to the Grand Royal Hotel—thanks to the hotel's significantly discounted rates and
+                        convenient conference facilities.
+                        Below are highlights from the exceptional speakers who ministered during the event.
+
                     </p>
                     <div class="hero-decoration" data-aos="fade-up" data-aos-delay="200">
                         <div class="decoration-circle"></div>
@@ -1115,17 +1122,23 @@
             <!-- Speaker 1 -->
             <div class="speaker-card" data-aos="fade-up" data-aos-delay="200">
                 <div class="speaker-image-container">
-                    <img src="assets/images/general/johnbegisen.png" alt="John Begisen"
+                    <img src="assets/images/general/johnbegisen.png" alt="Evangelist John Begisen"
                         class="speaker-image">
                 </div>
                 <div class="speaker-info">
-                    <h3 class="speaker-name">John Begisen</h3>
+                    <h3 class="speaker-name">Evangelist John Begisen</h3>
                     <h4 class="speaker-topic">"End-Time Prophecy"</h4>
-                    <p class="speaker-bio">John Begisen delivered an inspiring message on end-time
-                        prophecy giving highlights of Christ's's imminent return, calling for repentance, steadfast
-                        faith,
-                        and spiritual readiness while interpreting biblical signs to warn of coming tribulation and
-                        final judgment.</p>
+                    <p class="speaker-bio">Evangelist John Begisen delivered an inspiring message about current world
+                        events and the signs foretold by God’s prophets in the Bible, including Jesus Christ’s own
+                        discourse on the Mount of Olives. These signs clearly indicate that we are living in the final
+                        days of life on this planet earth. <br> <br>
+                        Therefore, we must be aware of Christ’s imminent return and ensure that we are born again,
+                        living lives marked by repentance, steadfast faith, and spiritual holiness and readiness. We are
+                        called to interpret biblical signs to warn others about the coming rapture of the Church into
+                        heaven, the tribulation that will follow for those left behind, and the final judgment—where the
+                        saved will dwell forever in the presence of God, while the wicked will be cast into the eternal
+                        lake of fire.
+                    </p>
                 </div>
             </div>
             <!-- Speaker 2 -->
@@ -1137,9 +1150,15 @@
                 <div class="speaker-info">
                     <h3 class="speaker-name">Bishop Beatrice Mbaya</h3>
                     <h4 class="speaker-topic">"Encouragement To The Youth"</h4>
-                    <p class="speaker-bio">Bishop Beatrice Mbaya emphasized encouraging
-                        youth to grow spiritually, develop their God-given potential, and embrace leadership roles
-                        within the community as faithful stewards and examples of Christ's's love and service.</p>
+                    <p class="speaker-bio">With a mother’s heart and deep spiritual wisdom, Bishop Beatrice Mbaya saw
+                        clearly into the struggles our youth face today. She boldly named the roots of their pain and
+                        illuminated the way forward—through the power of faith in Jesus Christ. She passionately called
+                        on the youth to boldly rise up in Christ, grow in their walk with God, unlock their divine
+                        potential, and lead by example—just as Christ did. Her message was a heartfelt charge: to step
+                        into leadership with courage, love, and service, becoming shining lights of God’s grace in their
+                        communities. <br> <br>
+                        In all these Jesus must be the Lord of their lives.
+                    </p>
                 </div>
             </div>
 
@@ -1150,11 +1169,21 @@
                         class="speaker-image">
                 </div>
                 <div class="speaker-info">
-                    <h3 class="speaker-name">Benjamin Wanyama</h3>
+                    <h3 class="speaker-name">Youth Pastor Benjamin Wanyama</h3>
                     <h4 class="speaker-topic">"Spiritual Growth & Spiritual Cities"</h4>
-                    <p class="speaker-bio">Benjamin Wanyama focused on how believers develop their faith while
-                        building spiritual communities that reflect God's kingdom principles, transforming both
-                        individual souls and collective environments through the love of Christ's.</p>
+                    <p class="speaker-bio">With the heart of a young man and the fear of God, Pastor Benjamin Wanyama
+                        spoke powerfully into the struggles facing today’s youth. He dug deep into the reasons behind
+                        their spirit of rebellion—the belief that they know better than their elders—and courageously
+                        exposed the dark forces of satanic worship and drug addiction that are silently creeping into
+                        our schools. With love and urgency, he declared the only true answer: surrendering completely to
+                        Christ Jesus. <br> <br>
+                        Pastor Benjamin passionately shared how the Holy Spirit offers victory, strength, and spiritual
+                        gifts to every young person willing to stand firm in their faith. He warned that the alluring
+                        traps of this world are dragging many into depression, broken dreams, and even suicide. But hope
+                        remains! He urged the youth to rise up, to deepen their trust in God, and to become shining
+                        lights to those around them—living testimonies of God’s kingdom, transforming hearts and
+                        communities through the unstoppable love of Christ.
+                    </p>
                 </div>
             </div>
 
@@ -1167,47 +1196,56 @@
                 <div class="speaker-info">
                     <h3 class="speaker-name">Joseph Wanyama</h3>
                     <h4 class="speaker-topic">"The Act of Forgiveness"</h4>
-                    <p class="speaker-bio"> Joseph Wanyama highlights on forgiveness as a divine commandment, spiritual
-                        healing process and path
-                        to personal liberation that reflects God's mercy toward humanity.</p>
+                    <p class="speaker-bio"> Evangelist Joseph Wanyama underscored the vital foundations of life in
+                        Christ: love, forgiveness, holiness, and purity. Forgiveness, as commanded by Jesus Christ, is
+                        not only essential for anyone aspiring to follow Him, but also a prerequisite for receiving
+                        God's own forgiveness and redemption. As the youth embrace these divine commands—to forgive
+                        without reservation, to love one another deeply, and to live in holiness, set apart from the
+                        ways of this sinful world, with minds and hearts purified by following and obeying God’s word,
+                        in thought, attitude, and intention—they will embark on a journey of spiritual healing and
+                        personal liberation. In doing so, they will overcome the world and mirror the boundless mercy of
+                        God toward humanity.</p>
                 </div>
             </div>
         </div>
     </section>
-        <!-- Gallery Section -->
-        <section class="gallery-section">
-            <div class="container">
-                <div class="text-center mb-5" data-aos="fade-up">
-                    <h2 class="display-4 fw-bold gradient-text">Gallery</h2>
-                    <div class="hero-decoration mt-4">
-                        <div class="decoration-circle"></div>
-                        <div class="decoration-line"></div>
-                        <div class="decoration-circle"></div>
-                    </div>
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="display-4 fw-bold gradient-text">Gallery</h2>
+                <div class="hero-decoration mt-4">
+                    <div class="decoration-circle"></div>
+                    <div class="decoration-line"></div>
+                    <div class="decoration-circle"></div>
                 </div>
-                <div class="gallery-container">
-                    <!-- 9 Landscape Images -->
-                    <div class="gallery-item" data-aos="fade-up">
-                        <img src="assets/images/nyangorievent/1.jpg" alt="Prayer Session">
-                            </div>
-                    <div class="gallery-item" data-aos="fade-up" data-aos-delay="100">
-                        <img src="assets/images/nyangorievent/2.jpg" alt="Group Discussion">
-                        </div>
-                    <div class="gallery-item" data-aos="fade-up" data-aos-delay="200">
-                        <img src="assets/images/nyangorievent/3.jpg" alt="Worship Time">
-                    </div>
-                    <div class="gallery-item" data-aos="fade-up" data-aos-delay="300">
-                        <img src="assets/images/nyangorievent/4.jpg" alt="Teaching Session">
+            </div>
+            <div class="gallery-container">
+                <!-- 9 Landscape Images -->
+                <div class="gallery-item" data-aos="fade-up">
+                    <img src="assets/images/nyangorievent/1.jpg" alt="Prayer Session">
                 </div>
-                    <!-- Portrait Image -->
-                    <div class="gallery-item" data-aos="fade-up" data-aos-delay="500">
-                        <img src="assets/images/nyangorievent/5.jpg" alt="Fellowship Time">
-                        </div>
-                    <div class="gallery-item" data-aos="fade-up" data-aos-delay="600">
-                        <img src="assets/images/nyangorievent/6.jpg" alt="Group Prayer">
-                    </div>
-    
-    
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="100">
+                    <img src="assets/images/nyangorievent/2.jpg" alt="Group Discussion">
+                </div>
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="200">
+                    <img src="assets/images/nyangorievent/3.jpg" alt="Worship Time">
+                </div>
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="300">
+                    <img src="assets/images/nyangorievent/4.jpg" alt="Teaching Session">
+                </div>
+                <!-- Portrait Image -->
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="500">
+                    <img src="assets/images/nyangorievent/5.jpg" alt="Fellowship Time">
+                </div>
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="600">
+                    <img src="assets/images/nyangorievent/6.jpg" alt="Group Prayer">
+                </div>
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="600">
+                    <img src="assets/images/nyangorievent/8.jpg" alt="Group Prayer">
+                </div>
+
+
             </div>
         </div>
     </section>

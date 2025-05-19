@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Mbale-Vihiga Pastors Prayer Retreat | CAM</title>
+    <title>Tiriki Pastors Prayer Retreat | CAM</title>
     <link rel="icon" type="image/png" href="assets/images/logo.png">
 
     <!-- Bootstrap 5.3 CSS -->
@@ -679,10 +679,9 @@
             grid-row: span 2;
         }
 
-        /* Event Recap Section */
         .event-recap {
-            padding: 120px 0;
             background: linear-gradient(135deg, rgba(94, 53, 177, 0.05) 0%, rgba(0, 188, 212, 0.05) 100%);
+            padding: 120px 0 80px;
             position: relative;
             overflow: hidden;
             margin-top: 80px;
@@ -714,70 +713,43 @@
             animation: float 12s infinite reverse;
         }
 
-        .recap-content h2 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 2rem;
-            line-height: 1.2;
-        }
-
-        .recap-image-wrapper {
-            position: relative;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .recap-image-wrapper img {
-            width: 100%;
-            height: auto;
-            transition: transform 0.3s ease;
-        }
-
-        .recap-image-wrapper:hover img {
-            transform: scale(1.02);
-        }
-
         .recap-content {
-            padding: 30px;
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 0 20px;
         }
 
-        .detail-item {
-            background: rgba(255, 255, 255, 0.8);
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .detail-item:hover {
-            transform: translateY(-5px);
-        }
-
-        .detail-item h4 {
+        .recap-content h2 {
             color: var(--primary);
+            margin-bottom: 30px;
             font-weight: 600;
+            font-size: 2.5rem;
         }
 
-        .detail-item p {
+        .recap-content p {
+            font-size: 1.2rem;
+            line-height: 1.8;
             color: var(--text-dark);
             opacity: 0.9;
-            line-height: 1.8;
-        }
-
-        .detail-item ul li {
-            color: var(--text-dark);
-            opacity: 0.9;
-            line-height: 1.8;
+            margin-bottom: 0;
         }
 
         @media (max-width: 991.98px) {
-            .recap-content {
-                padding: 30px 0;
+            .gallery-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 575.98px) {
+            .gallery-container {
+                grid-template-columns: 1fr;
             }
 
-            .recap-image-wrapper {
-                margin-bottom: 30px;
+            .gallery-item.portrait {
+                grid-row: auto;
             }
         }
     </style>
@@ -833,43 +805,78 @@
         </div>
     </nav>
 
-
     <!-- Event Recap Section -->
     <section class="event-recap">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6" data-aos="fade-right">
-                    <div class="recap-image-wrapper">
-                        <img src="assets/images/mbale/1.png" 
-                            class="img-fluid rounded-4 shadow-lg">
-                    </div>
+            <div class="row align-items-center" data-aos="fade-up">
+                <div class="col-lg-4">
+                    <h2 class="display-4 fw-bold mb-4 gradient-text">Event Recap</h2>
                 </div>
-                <div class="col-lg-6" data-aos="fade-left">
-                    <div class="recap-content ps-lg-4">
-                        <h2 class="gradient-text mb-4">Event Recap</h2>
-                        <div class="recap-details">
-                            <div class="detail-item mb-4">
-                                <h4 class="h5 mb-3">Spiritual Renewal & Transformation</h4>
-                                <p class="mb-0">The Pastors Prayer Retreat marked a profound
-                                    spiritual awakening, bringing together church leaders for an intensive period of
-                                    prayer and renewal. This gathering created a powerful atmosphere of spiritual
-                                    breakthrough, where pastors experienced deep personal transformation and received
-                                    fresh vision for their ministries.</p>
-                            </div>
-                            <div class="detail-item">
-                                <h4 class="h5 mb-3">Impact</h4>
-                                <p class="mb-0">The retreat catalyzed a spiritual revival that has rippled through both
-                                    regions, strengthening church leadership and fostering greater unity among
-                                    congregations. The transformative power of this gathering continues to manifest in
-                                    renewed passion for ministry, enhanced pastoral effectiveness, and deeper community
-                                    engagement across Vihiga and Mbale.</p>
-                            </div>
-                        </div>
-                    </div>
+                <div class="col-lg-8">
+                    <p class="lead lh-lg" style="font-size: 1.25rem; line-height: 1.8; color: var(--text-dark);">Through
+                        divine instruction to the CAM ministry, the Lord orchestrated the gathering of several spiritual
+                        leaders — shepherds of churches rooted in the lands inhabited by the Tiriki subtribe — for a
+                        sacred retreat of fervent prayer and anointing for spiritual warfare. During this solemn
+                        assembly, the dark forces that had long held sway over the region were exposed, denounced, and
+                        bound by the authority entrusted to the Church, as declared in <strong>Matthew 16:19 and 18:18.</strong>
+                        For generations, our people had been shackled under the oppressive rule of territorial demonic
+                        principalities — forces that bred poverty, illiteracy, and the bondage of traditional rituals
+                        such as <strong>idumi, luvego, and shinini</strong>. But the pastors present, emboldened by the Spirit of God,
+                        rose up in holy defiance. With bold faith and unwavering authority, they confronted and
+                        renounced these powers, binding and breaking their strongholds to proclaim liberty to the
+                        captives!
+                        In a mighty and victorious act, Tiriki was consecrated and surrendered to the lordship of Jesus
+                        Christ! And by this divine authority and victory, we declare with unwavering confidence — Tiriki
+                        will never be the same again!
+                    </p>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="display-4 fw-bold gradient-text">Gallery</h2>
+                <div class="hero-decoration mt-4">
+                    <div class="decoration-circle"></div>
+                    <div class="decoration-line"></div>
+                    <div class="decoration-circle"></div>
+                </div>
+            </div>
+            <div class="gallery-container">
+                <!-- Rwanda Event Images -->
+                <div class="gallery-item" data-aos="fade-up">
+                    <img src="assets/images/tirikipastors/1.jpg" alt="Rwanda Event 1">
+                </div>
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="100">
+                    <img src="assets/images/tirikipastors/2.jpg" alt="Rwanda Event 2">
+                </div>
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="200">
+                    <img src="assets/images/tirikipastors/3.jpg" alt="Rwanda Event 3">
+                </div>
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="300">
+                    <img src="assets/images/tirikipastors/4.jpg" alt="Rwanda Event 4">
+                </div>
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="400">
+                    <img src="assets/images/tirikipastors/5.jpg" alt="Rwanda Event 5">
+                </div>
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="500">
+                    <img src="assets/images/tirikipastors/6.jpg" alt="Rwanda Event 6">
+                </div>
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="600">
+                    <img src="assets/images/tirikipastors/7.jpg" alt="Rwanda Event 7">
+                </div>
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="700">
+                    <img src="assets/images/tirikipastors/8.jpg" alt="Rwanda Event 8">
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
 
     <!-- Footer -->
     <footer>

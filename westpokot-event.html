@@ -679,10 +679,9 @@
             grid-row: span 2;
         }
 
-        /* Event Recap Section */
         .event-recap {
-            padding: 120px 0;
             background: linear-gradient(135deg, rgba(94, 53, 177, 0.05) 0%, rgba(0, 188, 212, 0.05) 100%);
+            padding: 120px 0 80px;
             position: relative;
             overflow: hidden;
             margin-top: 80px;
@@ -712,6 +711,46 @@
             bottom: -100px;
             left: -100px;
             animation: float 12s infinite reverse;
+        }
+
+        .recap-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .recap-content h2 {
+            color: var(--primary);
+            margin-bottom: 30px;
+            font-weight: 600;
+            font-size: 2.5rem;
+        }
+
+        .recap-content p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--text-dark);
+            opacity: 0.9;
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 991.98px) {
+            .gallery-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 575.98px) {
+            .gallery-container {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-item.portrait {
+                grid-row: auto;
+            }
         }
 
         .recap-content h2 {
@@ -833,34 +872,73 @@
         </div>
     </nav>
 
-
     <!-- Event Recap Section -->
     <section class="event-recap">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6" data-aos="fade-right">
-                    <div class="recap-image-wrapper">
-                        <img src="assets/images/westpokot/1.JPG" class="img-fluid rounded-4 shadow-lg">
-                    </div>
+        <div class="recap-content ps-lg-4">
+            <h2 class="gradient-text mb-4">Event Recap</h2>
+            <div class="recap-details">
+                <div class="detail-item mb-4">
+                    <h4 class="h5 mb-3">Spiritual Renewal & Fellowship</h4>
+                    <p class="mb-0">The West Pokot Prayer Retreat was a transformative gathering that brought together
+                        believers from across the region for a time of deep spiritual renewal and fellowship. Through
+                        powerful worship sessions, heartfelt prayers, and inspiring messages, participants experienced a
+                        profound connection with God and one another. The retreat provided a sacred space for personal
+                        reflection, healing and Spiritual growth.</p>
                 </div>
-                <div class="col-lg-6" data-aos="fade-left">
-                    <div class="recap-content ps-lg-4">
-                        <h2 class="gradient-text mb-4">Event Recap</h2>
-                        <div class="recap-details">
-                            <div class="detail-item mb-4">
-                                <h4 class="h5 mb-3">Spiritual Renewal & Fellowship</h4>
-                                <p class="mb-0">The West Pokot Prayer Retreat was a transformative gathering that brought together believers from across the region for a time of deep spiritual renewal and fellowship. Through powerful worship sessions, heartfelt prayers, and inspiring messages, participants experienced a profound connection with God and one another. The retreat provided a sacred space for personal reflection, healing, and spiritual growth.</p>
-                            </div>
-                            <div class="detail-item">
-                                <h4 class="h5 mb-3">Impact</h4>
-                                <p class="mb-0">The event left a lasting impact on the community, with many lives touched and transformed. Participants returned to their communities with renewed faith and commitment to serve. The retreat strengthened the bonds between different church groups and created a foundation for ongoing spiritual support and collaboration. The testimonies shared during the event demonstrated the powerful work of God in individual lives and the community as a whole.</p>
-                            </div>
-                        </div>
-                    </div>
+                <div class="detail-item">
+                    <h4 class="h5 mb-3">Impact</h4>
+                    <p class="mb-0">The event left a lasting impact on the community with many lives touched and
+                        transformed. Participants returned to their communities with renewed faith and commitment to
+                        serve. The retreat strenghthened the bonds between different church groups and created a
+                        foundation for ongoing spiritual support and collaboration. The testimonies shared during the
+                        event demonstrated the powerful work of God in individual lives and the community as a whole.
+                    </p>
                 </div>
             </div>
         </div>
+        </div>
+        </div>
+        </div>
     </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="display-4 fw-bold gradient-text">Gallery</h2>
+                <div class="hero-decoration mt-4">
+                    <div class="decoration-circle"></div>
+                    <div class="decoration-line"></div>
+                    <div class="decoration-circle"></div>
+                </div>
+            </div>
+            <div class="gallery-container">
+                <!-- Rwanda Event Images -->
+                <div class="gallery-item" data-aos="fade-up">
+                    <img src="assets/images/westpokot/2.JPG" alt="Rwanda Event 1">
+                </div>
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="100">
+                    <img src="assets/images/westpokot/3.JPG" alt="Rwanda Event 2">
+                </div>
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="200">
+                    <img src="assets/images/westpokot/4.JPG" alt="Rwanda Event 3">
+                </div>
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="300">
+                    <img src="assets/images/westpokot/5.JPG" alt="Rwanda Event 4">
+                </div>
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="400">
+                    <img src="assets/images/westpokot/6.JPG" alt="Rwanda Event 5">
+                </div>
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="500">
+                    <img src="assets/images/westpokot/7.JPG" alt="Rwanda Event 6">
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+
+
 
     <!-- Footer -->
     <footer>
